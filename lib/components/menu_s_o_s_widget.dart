@@ -107,7 +107,7 @@ class _MenuSOSWidgetState extends State<MenuSOSWidget> {
                   safeSetState(() {});
                   Navigator.pop(context);
                 },
-                text: 'Confirmação por whatsapp',
+                text: 'Confirmação por chat',
                 options: FFButtonOptions(
                   width: double.infinity,
                   height: 60.0,

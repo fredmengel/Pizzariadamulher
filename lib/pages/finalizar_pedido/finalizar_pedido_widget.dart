@@ -1112,127 +1112,149 @@ class _FinalizarPedidoWidgetState extends State<FinalizarPedidoWidget> {
                       ),
                     ),
                   ),
-                  InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onLongPress: () async {
-                      currentUserLocationValue = await getCurrentUserLocation(
-                          defaultLocation: LatLng(0.0, 0.0));
-                      FFAppState().userLocation = currentUserLocationValue;
-                      safeSetState(() {});
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            'Erro no pedido.Escolha forma contato:',
-                            style: FlutterFlowTheme.of(context)
-                                .displayLarge
-                                .override(
-                                  font: GoogleFonts.urbanist(
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .displayLarge
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .displayLarge
-                                        .fontStyle,
-                                  ),
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  fontSize: 60.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FlutterFlowTheme.of(context)
-                                      .displayLarge
-                                      .fontWeight,
-                                  fontStyle: FlutterFlowTheme.of(context)
-                                      .displayLarge
-                                      .fontStyle,
-                                ),
-                            textAlign: TextAlign.center,
-                          ),
-                          duration: Duration(milliseconds: 9350),
-                          backgroundColor: Color(0xFFD2393C),
-                        ),
-                      );
-                      await Future.delayed(
-                        Duration(
-                          milliseconds: 3000,
-                        ),
-                      );
-                      await showModalBottomSheet(
-                        isScrollControlled: true,
-                        backgroundColor: Colors.transparent,
-                        enableDrag: false,
-                        context: context,
-                        builder: (context) {
-                          return GestureDetector(
-                            onTap: () {
-                              FocusScope.of(context).unfocus();
-                              FocusManager.instance.primaryFocus?.unfocus();
-                            },
-                            child: Padding(
-                              padding: MediaQuery.viewInsetsOf(context),
-                              child: MenuSOSWidget(),
+                  Align(
+                    alignment: AlignmentDirectional(0.0, 0.0),
+                    child: Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onLongPress: () async {
+                          currentUserLocationValue =
+                              await getCurrentUserLocation(
+                                  defaultLocation: LatLng(0.0, 0.0));
+                          FFAppState().userLocation = currentUserLocationValue;
+                          safeSetState(() {});
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                'Erro no pedido.Escolha forma contato:',
+                                style: FlutterFlowTheme.of(context)
+                                    .displayLarge
+                                    .override(
+                                      font: GoogleFonts.urbanist(
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .displayLarge
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .displayLarge
+                                            .fontStyle,
+                                      ),
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      fontSize: 60.0,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .displayLarge
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .displayLarge
+                                          .fontStyle,
+                                    ),
+                                textAlign: TextAlign.center,
+                              ),
+                              duration: Duration(milliseconds: 9350),
+                              backgroundColor: Color(0xFFD2393C),
                             ),
                           );
-                        },
-                      ).then((value) => safeSetState(() {}));
+                          await Future.delayed(
+                            Duration(
+                              milliseconds: 3000,
+                            ),
+                          );
+                          await showModalBottomSheet(
+                            isScrollControlled: true,
+                            backgroundColor: Colors.transparent,
+                            enableDrag: false,
+                            context: context,
+                            builder: (context) {
+                              return GestureDetector(
+                                onTap: () {
+                                  FocusScope.of(context).unfocus();
+                                  FocusManager.instance.primaryFocus?.unfocus();
+                                },
+                                child: Padding(
+                                  padding: MediaQuery.viewInsetsOf(context),
+                                  child: MenuSOSWidget(),
+                                ),
+                              );
+                            },
+                          ).then((value) => safeSetState(() {}));
 
-                      if (FFAppState().decisaoSOS == 'ligar') {
-                        await actions.sendEmergencyAction(
-                          '',
-                          '',
-                          '',
-                          '',
-                          'ligar',
-                        );
-                      } else if (FFAppState().decisaoSOS == 'whatsapp') {
-                      } else {
-                        await actions.sendEmergencyAction(
-                          _model.textController2.text,
-                          _model.textController3.text,
-                          _model.textController5.text,
-                          _model.textController4.text,
-                          'ligar',
-                        );
-                      }
-                    },
-                    child: FFButtonWidget(
-                      onPressed: () {
-                        print('Button pressed ...');
-                      },
-                      text: 'Segure para Fazer o Pedido',
-                      icon: Icon(
-                        Icons.shopping_cart,
-                        size: 24.0,
-                      ),
-                      options: FFButtonOptions(
-                        width: double.infinity,
-                        height: 50.0,
-                        padding: EdgeInsets.all(22.0),
-                        iconPadding: EdgeInsetsDirectional.fromSTEB(
-                            16.0, 0.0, 16.0, 0.0),
-                        iconColor: Colors.white,
-                        color: Color(0xFFCC4125),
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleMedium.override(
+                          if (FFAppState().decisaoSOS == 'ligar') {
+                            await actions.sendEmergencyAction(
+                              '',
+                              '',
+                              '',
+                              '',
+                              'ligar',
+                            );
+                          } else if (FFAppState().decisaoSOS == 'whatsapp') {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Chat',
+                                  style: TextStyle(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                  ),
+                                ),
+                                duration: Duration(milliseconds: 4000),
+                                backgroundColor:
+                                    FlutterFlowTheme.of(context).secondary,
+                              ),
+                            );
+                            await actions.sendEmergencyAction(
+                              _model.textController2.text,
+                              _model.textController3.text,
+                              _model.textController5.text,
+                              _model.textController4.text,
+                              'whatsapp',
+                            );
+                          }
+                        },
+                        child: FFButtonWidget(
+                          onPressed: () {
+                            print('Button pressed ...');
+                          },
+                          text: 'Segure para Fazer o Pedido',
+                          icon: Icon(
+                            Icons.shopping_cart,
+                            size: 25.0,
+                          ),
+                          options: FFButtonOptions(
+                            width: double.infinity,
+                            height: 60.0,
+                            padding: EdgeInsets.all(16.0),
+                            iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                16.0, 0.0, 16.0, 0.0),
+                            iconColor: Colors.white,
+                            color: Color(0xFFCC4125),
+                            textStyle: FlutterFlowTheme.of(context)
+                                .titleMedium
+                                .override(
                                   font: GoogleFonts.manrope(
-                                    fontWeight: FontWeight.w500,
+                                    fontWeight: FontWeight.normal,
                                     fontStyle: FlutterFlowTheme.of(context)
                                         .titleMedium
                                         .fontStyle,
                                   ),
                                   color: Colors.white,
                                   letterSpacing: 0.0,
-                                  fontWeight: FontWeight.w500,
+                                  fontWeight: FontWeight.normal,
                                   fontStyle: FlutterFlowTheme.of(context)
                                       .titleMedium
                                       .fontStyle,
                                 ),
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                            ),
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
                         ),
-                        borderRadius: BorderRadius.circular(12.0),
                       ),
                     ),
                   ),

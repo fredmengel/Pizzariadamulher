@@ -16,16 +16,16 @@ Future sendEmergencyAction(
   String endereco,
   String referencia,
   String telefone,
-  String acao, // Novo parâmetro: 'ligar' ou 'whatsapp'
+  String acao, // <--- TEM QUE TER ISSO AQUI
 ) async {
   // --- CONFIGURAÇÃO ---
-  const String phoneNumber = "180"; // Polícia
-  const String whatsappNumber = "5561983090025"; // ONG/Ajuda
+  const String phoneNumber = "180";
+  const String whatsappNumber = "5561983090025";
   // --------------------
 
   final LatLng? userLocation = FFAppState().userLocation;
 
-  // --- CENÁRIO 1: LIGAÇÃO (VOZ) ---
+  // LÓGICA DA LIGAÇÃO
   if (acao == 'ligar') {
     final Uri phoneUri = Uri.parse("tel:$phoneNumber");
     try {
@@ -33,15 +33,14 @@ Future sendEmergencyAction(
     } catch (e) {
       print('Erro ao tentar ligar: $e');
     }
-    return; // Encerra aqui
+    return;
   }
 
-  // --- CENÁRIO 2: WHATSAPP (CHAT) ---
+  // LÓGICA DO WHATSAPP
   if (acao == 'whatsapp') {
     final StringBuffer message = StringBuffer();
-    // Mensagem Disfarçada
-    message
-        .writeln("Olá, gostaria de confirmar o pedido da Pizza. Pedido 180.");
+
+    message.writeln("Olá, gostaria de confirmar o pedido da Pizza. Pedido 180");
     message.writeln("Para o endereço abaixo:");
     message.writeln("-----------------------------------");
     message.writeln("Endereço: $endereco");

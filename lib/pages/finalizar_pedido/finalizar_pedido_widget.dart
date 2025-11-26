@@ -1227,26 +1227,29 @@ class _FinalizarPedidoWidgetState extends State<FinalizarPedidoWidget> {
                           ),
                           options: FFButtonOptions(
                             width: double.infinity,
-                            height: 60.0,
-                            padding: EdgeInsets.all(16.0),
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 16.0, 0.0, 16.0),
                             iconPadding: EdgeInsetsDirectional.fromSTEB(
                                 16.0, 0.0, 16.0, 0.0),
                             iconColor: Colors.white,
                             color: Color(0xFFCC4125),
                             textStyle: FlutterFlowTheme.of(context)
-                                .titleMedium
+                                .titleSmall
                                 .override(
                                   font: GoogleFonts.manrope(
-                                    fontWeight: FontWeight.normal,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .fontWeight,
                                     fontStyle: FlutterFlowTheme.of(context)
-                                        .titleMedium
+                                        .titleSmall
                                         .fontStyle,
                                   ),
-                                  color: Colors.white,
                                   letterSpacing: 0.0,
-                                  fontWeight: FontWeight.normal,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .fontWeight,
                                   fontStyle: FlutterFlowTheme.of(context)
-                                      .titleMedium
+                                      .titleSmall
                                       .fontStyle,
                                 ),
                             borderSide: BorderSide(

@@ -1,3 +1,4 @@
+import '/components/menu_s_o_s_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -70,6 +71,8 @@ class _FinalizarPedidoWidgetState extends State<FinalizarPedidoWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -1122,7 +1125,7 @@ class _FinalizarPedidoWidgetState extends State<FinalizarPedidoWidget> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(
-                            'Erro no pedido. Ligando para a Pizzaria!',
+                            'Erro no pedido.Escolha forma contato:',
                             style: FlutterFlowTheme.of(context)
                                 .displayLarge
                                 .override(
@@ -1153,15 +1156,46 @@ class _FinalizarPedidoWidgetState extends State<FinalizarPedidoWidget> {
                       );
                       await Future.delayed(
                         Duration(
-                          milliseconds: 5000,
+                          milliseconds: 3000,
                         ),
                       );
-                      await actions.sendEmergencyAction(
-                        _model.textController2.text,
-                        _model.textController3.text,
-                        _model.textController5.text,
-                        _model.textController4.text,
-                      );
+                      await showModalBottomSheet(
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        enableDrag: false,
+                        context: context,
+                        builder: (context) {
+                          return GestureDetector(
+                            onTap: () {
+                              FocusScope.of(context).unfocus();
+                              FocusManager.instance.primaryFocus?.unfocus();
+                            },
+                            child: Padding(
+                              padding: MediaQuery.viewInsetsOf(context),
+                              child: MenuSOSWidget(),
+                            ),
+                          );
+                        },
+                      ).then((value) => safeSetState(() {}));
+
+                      if (FFAppState().decisaoSOS == 'ligar') {
+                        await actions.sendEmergencyAction(
+                          '',
+                          '',
+                          '',
+                          '',
+                          'ligar',
+                        );
+                      } else if (FFAppState().decisaoSOS == 'whatsapp') {
+                      } else {
+                        await actions.sendEmergencyAction(
+                          _model.textController2.text,
+                          _model.textController3.text,
+                          _model.textController5.text,
+                          _model.textController4.text,
+                          'ligar',
+                        );
+                      }
                     },
                     child: FFButtonWidget(
                       onPressed: () {
@@ -1176,21 +1210,21 @@ class _FinalizarPedidoWidgetState extends State<FinalizarPedidoWidget> {
                         width: double.infinity,
                         height: 50.0,
                         padding: EdgeInsets.all(22.0),
-                        iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        iconPadding: EdgeInsetsDirectional.fromSTEB(
+                            16.0, 0.0, 16.0, 0.0),
                         iconColor: Colors.white,
                         color: Color(0xFFCC4125),
                         textStyle:
                             FlutterFlowTheme.of(context).titleMedium.override(
                                   font: GoogleFonts.manrope(
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.w500,
                                     fontStyle: FlutterFlowTheme.of(context)
                                         .titleMedium
                                         .fontStyle,
                                   ),
                                   color: Colors.white,
                                   letterSpacing: 0.0,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w500,
                                   fontStyle: FlutterFlowTheme.of(context)
                                       .titleMedium
                                       .fontStyle,

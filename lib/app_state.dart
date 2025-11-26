@@ -100,6 +100,12 @@ class FFAppState extends ChangeNotifier {
   set totalPrice(double value) {
     _totalPrice = value;
   }
+
+  String _decisaoSOS = '';
+  String get decisaoSOS => _decisaoSOS;
+  set decisaoSOS(String value) {
+    _decisaoSOS = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {

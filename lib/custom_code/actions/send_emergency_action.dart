@@ -16,56 +16,51 @@ Future sendEmergencyAction(
   String endereco,
   String referencia,
   String telefone,
+  String acao, // Novo parâmetro: 'ligar' ou 'whatsapp'
 ) async {
   // --- CONFIGURAÇÃO ---
-  const String phoneNumber = "180"; // Polícia (Prioridade 1)
-  // Número da ONG/Ajuda (Fallback) - Atualizado com o seu número
-  const String whatsappNumber = "5561983090025";
+  const String phoneNumber = "180"; // Polícia
+  const String whatsappNumber = "5561983090025"; // ONG/Ajuda
   // --------------------
 
   final LatLng? userLocation = FFAppState().userLocation;
-  final Uri phoneUri = Uri.parse("tel:$phoneNumber");
 
-  // TENTATIVA 1: LIGAÇÃO (Modo Forçado)
-  // Tentamos abrir o discador direto.
-  try {
-    // O await aqui é importante para garantir que o sistema processou o pedido
-    bool conseguiuLigar = await launchUrl(phoneUri);
-
-    // Se o sistema retornou 'true', o discador abriu. Encerramos a função.
-    if (conseguiuLigar) {
-      return;
+  // --- CENÁRIO 1: LIGAÇÃO (VOZ) ---
+  if (acao == 'ligar') {
+    final Uri phoneUri = Uri.parse("tel:$phoneNumber");
+    try {
+      await launchUrl(phoneUri);
+    } catch (e) {
+      print('Erro ao tentar ligar: $e');
     }
-  } catch (e) {
-    // Se der erro técnico (ex: rodando em PC), o código continua para o WhatsApp
-    print('Erro ao tentar ligar: $e');
+    return; // Encerra aqui
   }
 
-  // --- TENTATIVA 2: WHATSAPP (FALLBACK) ---
-  // Só chega aqui se a ligação falhou ou foi bloqueada pelo navegador
+  // --- CENÁRIO 2: WHATSAPP (CHAT) ---
+  if (acao == 'whatsapp') {
+    final StringBuffer message = StringBuffer();
+    // Mensagem Disfarçada
+    message
+        .writeln("Olá, gostaria de confirmar o pedido da Pizza. Pedido 180.");
+    message.writeln("Para o endereço abaixo:");
+    message.writeln("-----------------------------------");
+    message.writeln("Endereço: $endereco");
+    message.writeln("Ref: $referencia");
 
-  final StringBuffer message = StringBuffer();
-  message.writeln("Olá, gostaria de confirmar o pedido da Pizza. Pedido 180");
-  message.writeln("Para o endereço abaixo:");
-  message.writeln("-----------------------------------");
-  message.writeln("Endereço: $endereco");
-  message.writeln("Ref: $referencia");
+    if (userLocation != null) {
+      message.writeln("Link para entrega:");
+      message.writeln(
+          "http://googleusercontent.com/maps.google.com/maps?q=${userLocation.latitude},${userLocation.longitude}");
+    }
 
-  if (userLocation != null) {
-    message.writeln("Link para entrega:");
-    // Link do Maps para a polícia localizar rápido
-    message.writeln(
-        "http://googleusercontent.com/maps.google.com/maps?q=${userLocation.latitude},${userLocation.longitude}");
-  }
+    final String encodedMessage = Uri.encodeComponent(message.toString());
+    final Uri whatsappUri =
+        Uri.parse("https://wa.me/$whatsappNumber?text=$encodedMessage");
 
-  final String encodedMessage = Uri.encodeComponent(message.toString());
-  final Uri whatsappUri =
-      Uri.parse("https://wa.me/$whatsappNumber?text=$encodedMessage");
-
-  // Tenta abrir o WhatsApp
-  try {
-    await launchUrl(whatsappUri, mode: LaunchMode.externalApplication);
-  } catch (e) {
-    print('Erro ao abrir WhatsApp: $e');
+    try {
+      await launchUrl(whatsappUri, mode: LaunchMode.externalApplication);
+    } catch (e) {
+      print('Erro ao abrir WhatsApp: $e');
+    }
   }
 }

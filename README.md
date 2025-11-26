@@ -1,9 +1,9 @@
 # Pizza das Mulheres - Aplicativo de Proteção à Vítima de Violência (ODS 5)
 
-**Disciplina:** Programação para Dispositivos Móveis - Turma B (0925)
-**Professor:** Prof. Dr. Romes Heriberto
-**Modalidade:** Individual
-**Link:** https://pizzadas-mulheres-r0ues4.flutterflow.app/
+* **Disciplina:** Programação para Dispositivos Móveis - Turma B (0925)
+* **Professor:** Prof. Dr. Romes Heriberto
+* **Modalidade:** Individual
+* **Link:** https://pizzadas-mulheres-r0ues4.flutterflow.app/
 
 ## 1. Tema e Vinculação aos ODS
 Este projeto está vinculado ao **ODS 5: Igualdade de Gênero**.

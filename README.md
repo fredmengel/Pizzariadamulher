@@ -12,7 +12,7 @@ Este projeto está vinculado ao **ODS 5: Igualdade de Gênero**.
 * **Meta 16.1 (ODS 16):** Reduzir significativamente todas as formas de violência.
 
 ## 2. Descrição do Problema
-Muitas mulheres vítimas de violência doméstica vivem sob vigilância constante de seus agressores, o que as impede de realizar denúncias ou pedir socorro através de canais convencionais (ligações explícitas para o 190 ou mensagens de texto visíveis). A falta de um canal discreto e camuflado pode resultar na continuidade da violência ou em tragédias evitáveis.
+Muitas mulheres vítimas de violência doméstica vivem sob vigilância constante de seus agressores, o que as impede de realizar denúncias ou pedir socorro através de canais convencionais (ligações explícitas para o 180 ou mensagens de texto visíveis). A falta de um canal discreto e camuflado pode resultar na continuidade da violência ou em tragédias evitáveis.
 
 ## 3. Justificativa
 O desenvolvimento de um aplicativo *stealth* (camuflado) utiliza a tecnologia móvel para criar uma camada de proteção. Ao disfarçar a interface de emergência como um aplicativo de delivery de pizza, garantimos a segurança da vítima caso o agressor verifique o celular. O app aplica conceitos de **Engenharia Social** e **UX/UI** para segurança, além de integrar hardware (GPS e Discador) para resposta rápida, atendendo aos critérios de qualidade da ISO/IEC 25010 (Segurança e Usabilidade).
